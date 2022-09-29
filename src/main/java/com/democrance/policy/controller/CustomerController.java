@@ -1,5 +1,7 @@
 package com.democrance.policy.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,10 @@ public class CustomerController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+    }
+	
+	@RequestMapping(value = "/customer")
+    public ResponseEntity<List<Customer>> getAllCustomer() {
+        return new ResponseEntity<>(customerService.findAllCustomer(), HttpStatus.FOUND);
     }
 }

@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.democrance.policy.exception.ResourceNotFoundException;
 import com.democrance.policy.model.Customer;
+import com.democrance.policy.model.Policy;
 import com.democrance.policy.repository.CustomerRepository;
 
 @Service
@@ -28,6 +30,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAllCustomer() {
 		logger.info("---- call get all Customer -> ()");
         return this.customerRepository.findAll();
+	}
+
+	@Override
+	public Customer getCustomerById(long id) {
+		Customer customer = customerRepository.findById(id)
+		        .orElseThrow(() -> new ResourceNotFoundException("customer id " + id + "not found"));
+		return customer;		
 	}
 
 	

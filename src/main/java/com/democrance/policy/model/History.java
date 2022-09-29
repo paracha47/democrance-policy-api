@@ -1,5 +1,7 @@
 package com.democrance.policy.model;
 
+import java.util.Calendar;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,18 +21,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @Entity
-@Table(name = "policy")
-public class Policy {
+@Table(name = "history")
+public class History {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String type;
-	private Long premium;
-	private Long cover;
-	private String state;
+	private Long policyId;
 	private Long customerId;
+	private String state;
+	private Calendar createdDate;
 	
 	
 	

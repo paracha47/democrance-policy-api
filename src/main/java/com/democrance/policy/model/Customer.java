@@ -6,12 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "customer")
 public class Customer {
 
@@ -24,9 +30,6 @@ public class Customer {
 	private String gender;
 	private String dob;
 	private String address;
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
-//	@JsonIgnoreProperties("customer")
-//	private List<Policy> policy;
 	
 	
 }

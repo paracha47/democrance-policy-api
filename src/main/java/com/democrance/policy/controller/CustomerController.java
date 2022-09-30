@@ -47,6 +47,7 @@ public class CustomerController {
     }
 	
 	@RequestMapping(value = "/customer")
+    @ApiOperation(value = "Get All customers", notes = "Get All customers")
     public ResponseEntity<List<Customer>> getAllCustomer() {
         return new ResponseEntity<>(customerService.findAllCustomer(), HttpStatus.OK);
     }

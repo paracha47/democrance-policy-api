@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.democrance.policy.model.History;
 import com.democrance.policy.model.Policy;
-import com.democrance.policy.repository.HistoryRepository;
 import com.democrance.policy.service.PolicyService;
 
 import io.swagger.annotations.ApiOperation;
@@ -45,13 +43,14 @@ public class PolicyController {
     }
 	
 	@PutMapping("/quote/{id}")
+    @ApiOperation(value = "update quote", notes = "update quote")
 	public ResponseEntity<Policy> updatePolicy(@PathVariable("id") long id, @RequestBody Policy policy) {
 		
 		return new ResponseEntity<>(policyService.updatePolicy(id,policy), HttpStatus.OK);
 	}
 	
 	@GetMapping("/policies/{id}")
-    @ApiOperation(value = "Get policy", notes = "Get Policy")
+    @ApiOperation(value = "Get policy by id", notes = "Get Policy by id")
     public ResponseEntity<Policy> getPolicy(@PathVariable("id") long id ) {
 		Policy policy = policyService.getPolicy(id);
 		logger.info("Policy : {}", policy);
@@ -59,15 +58,15 @@ public class PolicyController {
     }
 	
 	@GetMapping("/policies")
-    @ApiOperation(value = "customer policies", notes = "Get customer polcies")
+    @ApiOperation(value = "customer policies", notes = "Get polcies by customer id")
     public ResponseEntity<List<Policy>> getCustomerPolicies(@RequestParam("customer_id") long custId ) {
 		List<Policy> customerPolicies = policyService.getCustomerPolicies(custId);
-		logger.info("Policy : {}", customerPolicies);
+		logger.info("customer policies : {}", customerPolicies);
 		return new ResponseEntity<>(customerPolicies, HttpStatus.OK);
     }
 	
 	@GetMapping("/policies/{id}/history")
-    @ApiOperation(value = "customer policies", notes = "Get customer polcies")
+    @ApiOperation(value = "Get policy history", notes = "Get policy history")
     public ResponseEntity<List<History>> getPolicyHistory(@PathVariable("id") long id ) {
 		List<History> policyHistory = policyService.getPolicyHistory(id);
 		logger.info("History : {}", policyHistory);

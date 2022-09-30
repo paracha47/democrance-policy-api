@@ -34,7 +34,7 @@ public class CustomerController {
 	@PostMapping("/create_customer")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "create customer", notes = "create the new customer")
-    public ResponseEntity<Customer> createGame(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 		try {			
 			Customer cust = customerService.createCustomer(customer);
 			logger.info("Customer created : {}", customer);
@@ -48,12 +48,12 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/customer")
     public ResponseEntity<List<Customer>> getAllCustomer() {
-        return new ResponseEntity<>(customerService.findAllCustomer(), HttpStatus.FOUND);
+        return new ResponseEntity<>(customerService.findAllCustomer(), HttpStatus.OK);
     }
 	
 	@GetMapping("/customer/{id}")
     @ApiOperation(value = "Get customer by id", notes = "Get customer")
-    public ResponseEntity<Customer> getPolicy(@PathVariable("id") long id ) {
+    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long id ) {
 		Customer customer = customerService.getCustomerById(id);
 		logger.info("Customer : {}", customer);
 		return new ResponseEntity<>(customer, HttpStatus.OK);

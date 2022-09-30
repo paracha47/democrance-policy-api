@@ -42,9 +42,10 @@ public class PolicyServiceImpl implements PolicyService {
 
 	@Override
 	public Policy updatePolicy(long id, Policy requestPolicy) {
-		Policy policy = policyRepository.findById(id)
-		        .orElseThrow(() -> new ResourceNotFoundException("Policy id " + id + "not found"));
-		policy.setId(id);
+		
+		if (!policyRepository.existsById(id)) 
+	        throw new ResourceNotFoundException("Policy id " + id + "not found");
+		
 		policyRepository.save(requestPolicy);
 		logPloicyState(requestPolicy, getMappedPolicyState(requestPolicy.getState()));
 		
